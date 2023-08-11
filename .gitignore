@@ -1,0 +1,7 @@
+venv
+.vscode
+*.log
+*.pyc
+*.html
+*.zip
+test.bat
