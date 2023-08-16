@@ -15,6 +15,8 @@ import common.api.system.release
 import report_errors
 import report_data
 import report_artifacts
+import common.report_archive
+import common.api.project.upload_reports
 
 ###################################################################################
 # Test the version of python to make sure it's at least the version the script
@@ -139,6 +141,27 @@ def main():
         else:
             reports = report_artifacts.create_report_artifacts(reportData)
             print("    Report artifacts have been created")
+
+    print("    Create report archive for upload")
+    uploadZipfile = common.report_archive.create_report_zipfile(reports, reportFileNameBase)
+    print("    Upload zip file creation completed")
+
+	#########################################################
+	# Upload the file to Code Insight
+    common.api.project.upload_reports.upload_project_report_data(baseURL, projectID, reportID, authToken, uploadZipfile)
+
+
+    #########################################################
+    # Remove the file since it has been uploaded to Code Insight
+    try:
+        os.remove(uploadZipfile)
+    except OSError:
+        logger.error("Error removing %s" %uploadZipfile)
+        print("Error removing %s" %uploadZipfile)
+
+    logger.info("Completed creating %s" %reportName)
+    print("Completed creating %s" %reportName)
+
 
 #----------------------------------------------------------------------# 
 def verifyOptions(reportOptions):
