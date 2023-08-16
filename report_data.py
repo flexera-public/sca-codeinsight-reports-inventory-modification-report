@@ -87,12 +87,12 @@ def gather_data_for_report(baseURL, projectID, authToken, reportName, reportOpti
                 inventoryItemLink = baseURL + '''/codeinsight/FNCI#myprojectdetails/?id=''' + str(projectID) + '''&tab=projectInventory&pinv=''' + str(inventoryID)
 
                 if createdBy in systemAlias:
-                    createdBy = "System Created"
+                    createdBy = "System"
                     createdByEmail = False
                 else:
                     # Based on login get the other user details
                     userDetails = common.api.users.search_users.get_user_details_by_login(baseURL, authToken, createdBy)
-                    createdBy = "%s %s" %(userDetails[0]["firstName"], userDetails[0]["lastName"])
+                    createdBy = "User - %s %s" %(userDetails[0]["firstName"], userDetails[0]["lastName"])
                     createdByEmail = userDetails[0]["email"]
                 
                 if updatedOn != createdOn:
