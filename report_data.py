@@ -29,7 +29,7 @@ def gather_data_for_report(baseURL, projectID, authToken, reportName, reportOpti
     inventoryDetails = {} # Hold the event data for a specific inventory Item
     applicationDetails = {} # Dictionary to allow a project to be mapped to an application name/version
 
-    systemAlias = ["Automated Finding", "High Confidence Auto-WriteUp Rule", "Medium Confidence Auto-WriteUp Rule"]
+    systemAlias = ["System", "Automated Finding", "High Confidence Auto-WriteUp Rule", "Medium Confidence Auto-WriteUp Rule"]
 
 
     # Get the list of parent/child projects start at the base project
